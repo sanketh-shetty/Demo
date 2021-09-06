@@ -87,14 +87,14 @@ const DisplayUsers = (props) => {
         )}
 
         {props.filteredUsers.length === 0 && props.users.length !== 0 && (
-          <div id="message">
+          <div className="message">
             <h2>{`No records matching records forund for: "${filter}"`}</h2>
           </div>
         )}
 
         {props.users.length !== 0 && props.filteredUsers.length !== 0 && (
           <div>
-            <h2>{`Matches found: ${props.filteredUsers.length}`}</h2>
+            <div className="message"><h2>{`Matches found: ${props.filteredUsers.length}`}</h2></div>
             <table cellPadding="8" cellSpacing="8" border="1">
               <tr>
                 <th>ID</th>
@@ -128,16 +128,19 @@ const DisplayUsers = (props) => {
   );
 };
 
+/** Address Display Format */
 const displayAddress = (addr) => {
   let { suite, street, city, zipcode } = addr;
   return `${suite}, ${street}, ${city} - ${zipcode}`;
 };
 
+
+//recursively search for a match
 const find = (obj, search, curId) => {
   for (let prop of Object.keys(obj)) {
 
     if (matches.includes(curId)) {
-      //quit saerch, object already matched
+      //quit saerch, object already matched the search query
       return;
     }
 
